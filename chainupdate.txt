@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title>Additional</title>
+</head>
+
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "***************",
+    authDomain: "****************",
+    databaseURL: "*************",
+    projectId: "**************",
+    //healthcard-6e612.appspot.com
+    storageBucket: "",
+    messagingSenderId: "**************",
+    //appId: "******************"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+    function getdata1(){
+      var user=document.getElementById("user").value;
+      firebase.database().ref(user).once('value').then(function (snapshot){
+        snapshot.forEach(function(childSnapshot)
+        {
+          disease1 = snapshot.val().Father,
+          //console.log(disease1);
+          prescreption1 = snapshot.val().Prescreption,
+          bmi1 = snapshot.val().bmi,
+          sugar1 = snapshot.val().sugar,
+          bp1 = snapshot.val().bp,
+          allergy1=snapshot.val().allergy,
+          Height=snapshot.val().Height,
+          Weight=snapshot.val().Weight,
+          bmi2 = (Weight/(Height*Height)),
+      
+          //document.getElementById("address").innerHTML = snapshot.val().Address;
+          //document.getElementById("allergy").innerHTML = snapshot.val().allergy;
+          newupdateData();
+          function newupdateData(){
+            var user=document.getElementById("user").value;
+            var fb = firebase.database().ref(user);
+            sugar2=document.getElementById("sugar").value,
+            disease2=document.getElementById("disease").value,
+            //console.log(disease2)
+            bp2=document.getElementById("bp").value,
+            allergy2=document.getElementById("allergy").value,
+            Prescreption2=document.getElementById("presc").value,
+            bmi=bmi2+","+bmi1,
+            sugar=sugar2+","+sugar1,
+            bp=bp2+","+bp1,
+            allergy=allergy2+","+allergy1,
+            disease=disease2+","+disease1,
+            //console.log(disease);
+            Prescreption=prescreption1+","+Prescreption2,
+            data={sugar,bp,allergy,Prescreption,bmi}
+            fb.update(data);
+            }
+
+      })
+        
+    })
+  }
+
+  
+  	
+  </script>
+  <h2>Enter birth id to update record for the user</h2>
+  <input type="text" placeholder="Enter birth id to update record" id="user">
+  <h2> Update data here</h2>
+  <h3> Data to be monitored regularly </h3>
+  Blood Sugar: <input type="text" placeholder="Blood Sugar" id="sugar"><br><br>
+  Blood Pressure: <input type="text" placeholder="Blood Pressure" id="bp"><br><br>
+  Allergies: <input type="text" placeholder="Allergies" id="allergy"><br><br>
+  Major disease: <input type="text" placeholder="major problem" id="disease"><br><br>
+  Prescreption: <input type="text" placeholder="Prescreption with date nd doctor's name" id="presc"><br><br>
+  <button type="submit" onclick="getdata1()">Update</button><br><br>
+  <a href="healthcard.html">Home Page</a>
+
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<html>
+<head>
+	<title>Register</title>
+</head>
+
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "*************",
+    authDomain: "*************",
+    databaseURL: "***************",
+    projectId: "****************",
+    //healthcard-6e612.appspot.com
+    storageBucket: "",
+    messagingSenderId: "**********",
+    //appId: "***************"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  function writeData(){
+  	firebase.database().ref(document.getElementById("birthIdField").value).set
+  	({
+  		Father : document.getElementById("fnameField").value,
+  	    Mother : document.getElementById("mnameField").value,
+  	    Child : document.getElementById("cnameField").value,
+  	    age : document.getElementById("ageField").value,
+  	    username : document.getElementById("usernameField").value,
+  	    password : document.getElementById("passwordField").value,
+  	    Bloodgroup : document.getElementById("bgroupField").value,
+  	    BirthID : document.getElementById("birthIdField").value,
+  	    Phno1 : document.getElementById("phno1Field").value,
+  	    Phno2 : document.getElementById("phno2Field").value,
+  	    Address : document.getElementById("addressField").value,
+  	    Pincode : document.getElementById("pincodeField").value,
+  	    BDate : document.getElementById("dateField").value,
+  	    sugar : "",
+  	    bp : "",
+  	    allergy : "",
+  	    Prescreption : "",
+  	    Height : "",
+  	    Weight : "",
+  	    bmi : "",
+  	    disease : "",
+   	});
+	
+  }
+
+  //function getData(){
+  	//firebase.database().ref('/').once('value',function(snapshot){
+  	//	snapshot.forEach(function(childSnapshot)
+  	//	{
+  	//		var childKey=childSnapshot.key;
+  	//		var childData=childSnapshot.val();
+  	//		document.getElementById("data").innerHTML = childData['name'] + ", " + childData['age'];
+  	//	})
+  			
+  	//})
+  //}
+
+ 
+
+  //getData();
+
+  /*var uploader = document.getElementById('uploader');
+  var fileButton = document.getElementById('fileButton');
+  fileButton.addEventListener('change',function(e)
+{
+  	var file = e.target.files(0);
+
+  	var storageRef = e.target.files[0];
+  	var storageRef = firebase.storage().ref(document.getElementById("birthIdField").value+file.name);
+  	storageRef.put(file);
+
+  	var task = storageRef.put(file);
+  	task.on('state_changed'),
+
+  	function progress(snapshot){
+  		var percentage=(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+  		uploader.value=percentage;
+  	},
+  	function error(err)
+  	{
+
+  	},
+  	function complete()
+  	{
+
+  	},
+  });
+  
+  <progress value="0" max="100" id="uploader">0%</progress>
+  <input type="file" value="upload" id="filebutton" />*/
+
+  </script>
+
+  
+  <h1> User Database</h1>
+  Father's Name- <input type="text" placeholder="Father's Name" id="fnameField"><br><br>
+  Mother's Name- <input type="text" placeholder="Mother's Name" id="mnameField"><br><br>
+  child's Name- <input type="text" placeholder="Child's Name" id="cnameField"><br><br>
+  Date of Birth- <input type="date" name="bday" id="dateField"><br><br>
+  Age- <input type="text" placeholder="age" id="ageField"> <br><br>
+  Email- <input type="email" placeholder="username-Email ID" id="usernameField"><br><br>
+  Password- <input type="password" placeholder="password" id="passwordField"><br><br>
+  Blood Group- <input type="text" placeholder="Blood Group" id="bgroupField"><br><br>
+  Birth ID- <input type="text" placeholder="Birth ID Group" id="birthIdField" required="required"><br><br>
+  Primary Phone no.- <input type="text" placeholder="Primary phone number" id="phno1Field"><br><br>
+  Secondary Phone no.- <input type="text" placeholder="Alternate phone number" id="phno2Field"><br><br>
+  Address- <input type="text" placeholder="Address" id="addressField"><br><br>
+  Pin Code- <input type="text" placeholder="Pin code" id="pincodeField"><br><br>
+  <button type="submit" onclick="writeData()">Submit</button><br><br>
+  <a href="getdata.html">Find user data here</a><br>
+  <a href="additional.html">Click to enter additional data</a><br>
+  <a href="chainupdate.html">Click to enter data to be maintained regularly</a><br>
+  <p id="data"></p>
+</body>
+</html>

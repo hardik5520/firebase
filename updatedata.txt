@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>Additional</title>
+</head>
+
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "*************",
+    authDomain: "****************",
+    databaseURL: "************",
+    projectId: "***********",
+    //healthcard-6e612.appspot.com
+    storageBucket: "",
+    messagingSenderId: "*****************",
+    //appId: "*********************"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  /*function writeData(){
+  	firebase.database().ref(document.getElementById("birthIdField").value).set
+  	({
+  		Father : document.getElementById("fnameField").value,
+  	    Mother : document.getElementById("mnameField").value,
+  	    Child : document.getElementById("cnameField").value,
+  	    age : document.getElementById("ageField").value,
+  	    username : document.getElementById("usernameField").value,
+  	    password : document.getElementById("passwordField").value,
+  	    Bloodgroup : document.getElementById("bgroupField").value,
+  	    BirthID : document.getElementById("birthIdField").value,
+  	    Weight : document.getElementById("weightField").value,
+  	    Phno1 : document.getElementById("phno1Field").value,
+  	    Phno2 : document.getElementById("phno2Field").value,
+  	    Address : document.getElementById("addressField").value,
+  	    Pincode : document.getElementById("pincodeField").value,
+  	    BDate : document.getElementById("dateField").value,
+  	});*/
+
+    function updateData(){
+      var user=document.getElementById("user").value;
+      var fb = firebase.database().ref(user);
+      Height=document.getElementById("height").value,
+      Weight=document.getElementById("weight").value,
+      bmi = (Weight/(Height*Height)),
+      data={Height,Weight}
+      fb.update(data);
+    }
+
+  	
+  </script>
+  <h2>Enter birth id to update record for the user</h2>
+  <input type="text" placeholder="Enter birth id to update record" id="user">
+  <h2> Update data here</h2>
+  <h3> Data to be monitored regularly </h3>
+  Height: <input type="text" placeholder="Height in metres" id="height"><br><br>
+  Weight: <input type="text" placeholder="Weight in kg" id="weight"><br><br>
+  <button type="submit" onclick="updateData()">Update</button><br><br>
+  <a href="getdata.html">Find user data here</a>
+  <a href="healthcard.html">Home Page</a>
+  </body>
+</html>

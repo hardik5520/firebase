@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Retreive Data</title>
+</head>
+
+<body>
+	<center>
+<h2>Enter birth Id to get information</h2>
+<input type="text" id="user" required="required">
+<button type="button" onclick="getdata()">Get</button>
+</center><br>
+
+<center>
+<p>Name: <strong id="name"></strong></p>
+<p>Age: <strong id="age"></strong></p>
+<p>Primary Phone No.: <strong id="Phno1"></strong></p>
+<p>Alternate Phone No.: <strong id="Phno2"></strong></p>
+<p>Blood Group: <strong id="blood"></strong></p>
+<p>Address: <strong id="address"></strong></p>
+<p>Allergies/Disorder: <strong id="allergy"></strong></p>
+</center>
+
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "************",
+    authDomain: "***************",
+    databaseURL: "************",
+    projectId: "**********",
+    //healthcard-6e612.appspot.com
+    storageBucket: "",
+    messagingSenderId: "************",
+    //appId: "************"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  function getdata(){
+  	var user=document.getElementById("user").value;
+	firebase.database().ref(user).once('value').then(function (snapshot){
+  		snapshot.forEach(function(childSnapshot)
+  			{
+  				//var childKey=user;
+  				//var childData=childSnapshot.val();
+  				document.getElementById("name").innerHTML = snapshot.val().Child;
+  				document.getElementById("age").innerHTML = snapshot.val().age;
+  				document.getElementById("Phno1").innerHTML = snapshot.val().Phno1;
+  				document.getElementById("Phno2").innerHTML = snapshot.val().Phno2;
+  				document.getElementById("blood").innerHTML = snapshot.val().Bloodgroup;
+  				document.getElementById("address").innerHTML = snapshot.val().Address;
+  				document.getElementById("allergy").innerHTML = snapshot.val().allergy;
+
+  		})
+  			
+  	})
+  }
+</script>
+<a href="healthcard.html">Home Page</a>
+<a href="additional.html">Click to update records</a>
+</body>
+</html>
